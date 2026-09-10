@@ -1,0 +1,30 @@
+# Example runtime configuration.
+# Full validation and schema are implemented in M1.
+id: hikvision-agent
+
+device:
+  mac_address: "00:00:00:00:00:00"
+
+video:
+  duration: 30
+
+recorders: []
+cameras: []
+triggers: []
+
+clip_server:
+  url: "https://example.invalid"
+
+trigger_server:
+  host: "0.0.0.0"
+  port: 8090
+
+web_server:
+  host: "127.0.0.1"
+  port: 8080
+
+storage:
+  temp_dir: "/dev/shm/hikvision-agent"
+
+logging:
+  path: "/var/log/hikvision-agent/agent.log"
