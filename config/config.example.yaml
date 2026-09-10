@@ -1,19 +1,31 @@
-# Example runtime configuration.
-# Full validation and schema are implemented in M1.
+# Runtime configuration example for Hikvision Clip Agent.
+# Secrets are kept separately in /etc/hikvision-agent/secrets.yaml (mode 0600).
 id: hikvision-agent
 
 device:
-  mac_address: "00:00:00:00:00:00"
+  mac_address: "00:11:22:33:44:55"
 
 video:
   duration: 30
 
-recorders: []
-cameras: []
-triggers: []
+recorders:
+  - id: nvr-1
+    url: "http://192.168.1.10"
+    username: admin
+
+cameras:
+  - id: camera-1
+    recorder_id: nvr-1
+    track_id: 101
+
+triggers:
+  - id: button-1
+    camera_id: camera-1
+    address: "192.168.1.20"
+    cooldown: 3
 
 clip_server:
-  url: "https://example.invalid"
+  url: "https://clips.example.com"
 
 trigger_server:
   host: "0.0.0.0"
