@@ -254,7 +254,10 @@ def load_config(path: str | Path) -> AgentConfig:
 
 def load_secrets(path: str | Path, config: AgentConfig) -> SecretsConfig:
     root = load_yaml(path)
-    recorder_values = _mapping(_required(root, "recorders", "secrets"), "secrets.recorders")
+    raw_recorders = _required(root, "recorders", "secrets")
+    if raw_recorders is None:
+        raw_recorders = {}
+    recorder_values = _mapping(raw_recorders, "secrets.recorders")
     secrets: dict[str, RecorderSecret] = {}
     for recorder in config.recorders:
         raw = recorder_values.get(recorder.id)
